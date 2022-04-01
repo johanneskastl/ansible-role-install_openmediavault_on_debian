@@ -6,3 +6,9 @@
   when:
     - 'ansible_distribution == "Debian"'
     - 'ansible_distribution_major_version == "11"'
+
+- name: 'Install the Openmediavault packages'
+  include: package_installation.yml
+  when:
+    - 'ansible_distribution == "Debian"'
+    - 'ansible_distribution_major_version == "11"'
