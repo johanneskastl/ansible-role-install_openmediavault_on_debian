@@ -1,0 +1,11 @@
+---
+# install_openmediavault_on_debian/tasks/main.yml
+
+- name: 'Install the Openmediavault packages'
+  package:
+    name:
+      - 'openmediavault-keyring'
+      - 'openmediavault'
+    state: 'present'
+    cache_valid_time: 0
+  ignore_errors: "{{ add_openmediavault_repository.changed | bool and ansible_check_mode | bool }}"
