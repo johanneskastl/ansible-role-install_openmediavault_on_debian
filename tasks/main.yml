@@ -12,3 +12,13 @@
   when:
     - 'ansible_distribution == "Debian"'
     - 'ansible_distribution_major_version == "11"'
+
+- name: 'Set the admin user password'
+  user:
+    name: 'admin'
+    password: "{{ admin_password_hash }}"
+  no_log: 'true'
+  when:
+    - 'ansible_distribution == "Debian"'
+    - 'ansible_distribution_major_version == "11"'
+    - 'admin_password_hash is defined'
