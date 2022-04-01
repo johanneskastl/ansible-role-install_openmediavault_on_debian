@@ -1,0 +1,8 @@
+---
+# install_openmediavault_on_debian/tasks/main.yml
+
+- name: 'Setup the Openmediavault package repository'
+  include: repository.yml
+  when:
+    - 'ansible_distribution == "Debian"'
+    - 'ansible_distribution_major_version == "11"'
