@@ -7,6 +7,12 @@
     state: 'present'
   register: 'gnupg_installation'
 
+- name: 'Download the Openmediavault GPG key'
+  get_url:
+    url: 'https://packages.openmediavault.org/public/archive.key'
+    dest: '/etc/apt/trusted.gpg.d/openmediavault-archive-keyring.asc'
+    mode: '0644'
+
 - name: 'Add the Openmediavault GPG key'
   apt_key:
     url: 'https://packages.openmediavault.org/public/archive.key'
