@@ -1,0 +1,21 @@
+---
+# install_openmediavault_on_debian/tasks/repository.yml
+
+- name: 'Make sure gnupg is installed'
+  package:
+    name: 'gnupg'
+    state: 'present'
+  register: 'gnupg_installation'
+
+- name: 'Add the Openmediavault GPG key'
+  apt_key:
+    url: 'https://packages.openmediavault.org/public/archive.key'
+    state: 'present'
+  ignore_errors: "{{ gnupg_installation.changed | bool and ansible_check_mode | bool }}"
+
+- name: 'Add the Openmediavault Repository'
+  apt_repository:
+    repo: 'deb https://packages.openmediavault.org/public shaitan main'
+    state: 'present'
+    filename: 'openmediavault'
+  register: 'add_openmediavault_repository'
