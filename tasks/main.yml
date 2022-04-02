@@ -13,6 +13,14 @@
     - 'ansible_distribution == "Debian"'
     - 'ansible_distribution_major_version == "11"'
 
+- name: 'Run omv-confdbadm populate (and create a dummy file to make this idempotent'
+  shell:
+    cmd: 'omv-confdbadm populate && touch /etc/openmediavault/.ansible_executed_omv-confdbadm_populate'
+    creates: '/etc/openmediavault/.ansible_executed_omv-confdbadm_populate'
+  when:
+    - 'ansible_distribution == "Debian"'
+    - 'ansible_distribution_major_version == "11"'
+
 - name: 'Set the admin user password'
   user:
     name: 'admin'
